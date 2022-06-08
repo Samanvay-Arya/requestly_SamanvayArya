@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="textView_style">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMaxTextSize">15sp</item>
+        <item name="autoSizeMinTextSize">5sp</item>
+        <item name="layout_constraintWidth_default">percent</item>
+        <item name="layout_constraintWidth_percent">0.5</item>
+
+
+    </style>
+
+    <style name="CardView_style">
+        <item name="cardElevation">5dp</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="layout_constraintWidth_default">percent</item>
+        <item name="layout_constraintWidth_percent">0.9</item>
+
+
+
+    </style>
+
+</resources>
