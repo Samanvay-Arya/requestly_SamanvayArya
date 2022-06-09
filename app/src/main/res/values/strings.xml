@@ -3,6 +3,8 @@
     <string name="show_comments">Show Comments</string>
     <string name="hold_tight">Hold Tight</string>
     <string name="i_am_working_on_it">I am working on it.......</string>
+    <string name="retry">Retry</string>
+    <string name="postbook">PostBook</string>
 
 
 </resources>

@@ -14,7 +14,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.samanvay.samanvayarya.RecyclerAdapters.PostAdapter;
 import com.samanvay.samanvayarya.interfaces.CommentInterface;
 import com.samanvay.samanvayarya.interfaces.PostInterface;
@@ -39,10 +41,11 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView Post_recyclerView;
     private List<PostType> postList;
     private List<CommentsType> CommentsList;
-    LoadingDialog loadingDialog;
-    OkHttpClient okHttpClient;
+    private LoadingDialog loadingDialog;
+    private OkHttpClient okHttpClient;
     Button retry;
     ImageView noInternet;
+    FloatingActionButton addPost;
 
     //url for post api call
     //https://dummyjson.com/posts
@@ -63,10 +66,14 @@ public class MainActivity extends AppCompatActivity {
         loadingDialog=new LoadingDialog(MainActivity.this);
         retry=findViewById(R.id.RetryButton_MainActivity);
         noInternet=findViewById(R.id.imageView_NoInternet_MainActivity);
+        addPost=findViewById(R.id.AddPost_Button_MainActivity);
 
 
         // ...
 
+        // Add Post OnclickListener
+          addPost.setOnClickListener(view -> Toast.makeText(MainActivity.this, "Coming soon", Toast.LENGTH_SHORT).show());
+        // ...
 
         // start progress bar
         loadingDialog.startLoadingDialog();
@@ -91,14 +98,9 @@ public class MainActivity extends AppCompatActivity {
             loadingDialog.dismissDialog();
             retry.setVisibility(View.VISIBLE);
             noInternet.setVisibility(View.VISIBLE);
-            retry.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Activity cur=MainActivity.this;
-                    cur.recreate();
-                }
-
-
+            retry.setOnClickListener(view -> {
+                Activity cur=MainActivity.this;
+                cur.recreate();
             });
         }
 
@@ -128,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 // ...
 
                 // Filling the CommentList by jsonResponseComments (through getComments method defined in CommentsInterface)
+                assert jsonResponseComments != null;
                 CommentsList=new ArrayList<>(Arrays.asList(jsonResponseComments.getComments()));
                 // ...
 
@@ -169,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Log.d("response", "onResponse: Post successful ");
                 JsonResponse jsonResponse=response.body();
+                assert jsonResponse != null;
                 postList=new ArrayList<>(Arrays.asList(jsonResponse.getPosts()));
                 loadingDialog.dismissDialog();
 
@@ -187,8 +191,6 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("NotifyDataSetChanged")
     private void fillPost() {
-
-
         PostAdapter adapter = new PostAdapter(postList, MainActivity.this, CommentsList);
         Post_recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         Post_recyclerView.setAdapter(adapter);
@@ -201,9 +203,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //method to check internet connectivity
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
+    // ...
 }

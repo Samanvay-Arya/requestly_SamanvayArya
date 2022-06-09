@@ -43,15 +43,14 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.VH> {
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
         CommentsType comment=CommentsList.get(position);
-        Boolean aBoolean=Integer.parseInt(comment.getName())==postId;
+        boolean aBoolean=Integer.parseInt(comment.getPostId())==postId;
         Log.d("TempList", "onClick: "+ aBoolean);
 
         if (aBoolean){
-//            String name=comment.getName();
             Log.d("TempList", "onClick: boolean is true");
-        holder.Name.setText("Name:  "+ Objects.requireNonNull(comment.getName()));
+        holder.Name.setText( Objects.requireNonNull(comment.getName())+"  is commented");
         holder.Email.setText(Objects.requireNonNull(comment.getEmail()));
-            holder.Body.setText("Comment:  "+Objects.requireNonNull(comment.getBody()));
+        holder.Body.setText(Objects.requireNonNull(comment.getBody()));
         }
         else{
             Log.d("TempList", "onClick: else ");

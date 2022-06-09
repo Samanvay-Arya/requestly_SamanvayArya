@@ -2,7 +2,6 @@ package com.samanvay.samanvayarya.RecyclerAdapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.VH> {
     private final Context context;
     private static PostAdapter.OnItemClickListener listener;
     private final List<CommentsType> CommentsList;
-//    List<CommentsType> TempList;
     private int opened=0,postId;
 
 
@@ -68,6 +66,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.VH> {
         TextView Title,Body,ShowComments;
         RecyclerView comments;
         CardView cardView;
+        @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
         public VH(@NonNull View itemView) {
             super(itemView);
             Title=itemView.findViewById(R.id.Title_Post_CardDesign_TV);
@@ -76,45 +75,31 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.VH> {
             cardView=itemView.findViewById(R.id.cardView_PostCardDesign);
             ShowComments=itemView.findViewById(R.id.ShowComments_PostCardDesign);
 
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
-                @Override
-                public void onClick(View view) {
-                    int position=getAdapterPosition();
+            cardView.setOnClickListener(view -> {
+                int position=getAdapterPosition();
 
-                    if (position!=RecyclerView.NO_POSITION && listener!=null){
-                        listener.onItemClick(position);
+                if (position!=RecyclerView.NO_POSITION && listener!=null){
+                    listener.onItemClick(position);
 
 
-                        if (opened==1){
-                            comments.setVisibility(View.GONE);
-                            ShowComments.setText("Show Comments");
-                            opened=0;
-                        }
-                        else{
-                            postId=Posts.get(position).getId();
-                            comments.setVisibility(View.VISIBLE);
-//                            if (CommentsList!=null){
-//                                Log.d("TempList", "onClick: CommentList is not null");
-//                                for (int i=0;i<CommentsList.size();i++){
-//                                    if(Integer.parseInt(CommentsList.get(i).getName())==postId){
-//                                        TempList.add(CommentsList.get(i));
-//                                        Log.d("TempList", "onClick: added "+i);
-//                                    }
-//                                }
-//                            }
-//                            Boolean bool=postId==2;
-
-                            CommentsAdapter commentsAdapter=new CommentsAdapter(CommentsList, context, postId);
-                            comments.setLayoutManager(new LinearLayoutManager(context));
-                            comments.setAdapter(commentsAdapter);
-                            commentsAdapter.notifyDataSetChanged();
-                            ShowComments.setText("Hide"+postId);
-                            opened=1;
-                        }
-
-
+                    if (opened==1){
+                        comments.setVisibility(View.GONE);
+                        ShowComments.setText("Show Comments");
+                        opened=0;
                     }
+                    else{
+                        postId=Posts.get(position).getId();
+                        comments.setVisibility(View.VISIBLE);
+
+                        CommentsAdapter commentsAdapter=new CommentsAdapter(CommentsList, context, postId);
+                        comments.setLayoutManager(new LinearLayoutManager(context));
+                        comments.setAdapter(commentsAdapter);
+                        commentsAdapter.notifyDataSetChanged();
+                        ShowComments.setText("Hide");
+                        opened=1;
+                    }
+
+
                 }
             });
 

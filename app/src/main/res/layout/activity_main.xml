@@ -25,9 +25,9 @@
         android:id="@+id/imageView_NoInternet_MainActivity"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="gone"
         android:scaleType="fitXY"
         android:src="@drawable/ic_baseline_signal_wifi_connected_no_internet_4_24"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
@@ -36,18 +36,61 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.8" />
+        app:layout_constraintWidth_percent="0.8"
+        tools:ignore="ContentDescription" />
 
     <Button
         android:id="@+id/RetryButton_MainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Retry"
-        android:visibility="gone"
+        android:text="@string/retry"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/imageView_NoInternet_MainActivity"
         app:layout_constraintStart_toStartOf="@+id/imageView_NoInternet_MainActivity"
         app:layout_constraintTop_toBottomOf="@+id/imageView_NoInternet_MainActivity" />
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/app_logo"
+        app:layout_constraintBottom_toTopOf="@+id/MainActivity_Post_RecyclerView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+
+    <TextView
+        style="@style/textView_style"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:text="@string/postbook"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/MainActivity_Post_RecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/AddPost_Button_MainActivity"
+        android:layout_marginBottom="40dp"
+        android:background="@color/Color1"
+        android:backgroundTint="@color/Color1"
+        android:src="@drawable/ic_baseline_add_24"
+        app:fabCustomSize="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ContentDescription" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
