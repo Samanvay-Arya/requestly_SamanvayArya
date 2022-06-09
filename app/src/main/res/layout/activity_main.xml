@@ -8,20 +8,46 @@
     tools:context=".MainActivity">
 
 
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/MainActivity_Post_RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="80dp"
-        android:background="@drawable/main_recylcler_view"
+        android:background="@drawable/main_recycler_view"
         android:paddingTop="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView_NoInternet_MainActivity"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_baseline_signal_wifi_connected_no_internet_4_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <Button
+        android:id="@+id/RetryButton_MainActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Retry"
+        android:visibility="gone"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageView_NoInternet_MainActivity"
+        app:layout_constraintStart_toStartOf="@+id/imageView_NoInternet_MainActivity"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_NoInternet_MainActivity" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

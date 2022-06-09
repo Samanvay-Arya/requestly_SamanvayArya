@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Samanvay Arya/AndroidStudioProjects/SamanvayArya/app/src/main/res/drawable-v24/comment_card.xml" value="0.2595" />
         <entry key="..\:/Users/Samanvay Arya/AndroidStudioProjects/SamanvayArya/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2595" />
         <entry key="..\:/Users/Samanvay Arya/AndroidStudioProjects/SamanvayArya/app/src/main/res/drawable-v24/main_recylcler_view.xml" value="0.2595" />
         <entry key="..\:/Users/Samanvay Arya/AndroidStudioProjects/SamanvayArya/app/src/main/res/drawable-v24/progress_bar.xml" value="0.2595" />
+        <entry key="..\:/Users/Samanvay Arya/AndroidStudioProjects/SamanvayArya/app/src/main/res/drawable/ic_baseline_signal_cellular_connected_no_internet_0_bar_24.xml" value="0.2595" />
+        <entry key="..\:/Users/Samanvay Arya/AndroidStudioProjects/SamanvayArya/app/src/main/res/drawable/ic_baseline_signal_wifi_connected_no_internet_4_24.xml" value="0.2595" />
         <entry key="..\:/Users/Samanvay Arya/AndroidStudioProjects/SamanvayArya/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2595" />
         <entry key="..\:/Users/Samanvay Arya/AndroidStudioProjects/SamanvayArya/app/src/main/res/layout/activity_main.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/Samanvay Arya/AndroidStudioProjects/SamanvayArya/app/src/main/res/layout/comments_card_design.xml" value="0.4" />

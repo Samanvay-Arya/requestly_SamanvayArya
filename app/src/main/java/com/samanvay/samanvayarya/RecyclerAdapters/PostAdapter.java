@@ -14,28 +14,20 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.samanvay.samanvayarya.MainActivity;
 import com.samanvay.samanvayarya.R;
-import com.samanvay.samanvayarya.interfaces.PostInterface;
 import com.samanvay.samanvayarya.repository.CommentsType;
 import com.samanvay.samanvayarya.repository.PostType;
 
 import java.util.List;
 
-import io.requestly.rqinterceptor.api.RQCollector;
-import io.requestly.rqinterceptor.api.RQInterceptor;
-import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.VH> {
-    private List<PostType> Posts;
-    private Context context;
+    private final List<PostType> Posts;
+    private final Context context;
     private static PostAdapter.OnItemClickListener listener;
-    private List<CommentsType> CommentsList;
-    private int opened=0;
+    private final List<CommentsType> CommentsList;
+//    List<CommentsType> TempList;
+    private int opened=0,postId;
+
 
 
     public PostAdapter(List<PostType> posts, Context context, List<CommentsType> commentsList) {
@@ -52,10 +44,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.VH> {
         return new VH(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
         PostType post=Posts.get(position);
-        holder.Title.setText(post.getTitle());
+        holder.Title.setText( post.getTitle());
         holder.Body.setText(post.getBody());
         holder.cardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(),R.anim.photo_anim));
 
@@ -63,12 +56,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.VH> {
 
     @Override
     public int getItemCount() {
-        return Posts.size();
+        if ((Posts!=null)){
+            return Posts.size();
+        }
+        else {
+            return 0;
+        }
     }
 
     public class VH extends RecyclerView.ViewHolder {
-        TextView Title;
-        TextView Body;
+        TextView Title,Body,ShowComments;
         RecyclerView comments;
         CardView cardView;
         public VH(@NonNull View itemView) {
@@ -77,8 +74,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.VH> {
             Body=itemView.findViewById(R.id.Body_Post_CardDesign_TV);
             comments=itemView.findViewById(R.id.Post_comments_RecyclerView);
             cardView=itemView.findViewById(R.id.cardView_PostCardDesign);
+            ShowComments=itemView.findViewById(R.id.ShowComments_PostCardDesign);
+
             cardView.setOnClickListener(new View.OnClickListener() {
-                @SuppressLint("NotifyDataSetChanged")
+                @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
                 @Override
                 public void onClick(View view) {
                     int position=getAdapterPosition();
@@ -89,14 +88,28 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.VH> {
 
                         if (opened==1){
                             comments.setVisibility(View.GONE);
+                            ShowComments.setText("Show Comments");
                             opened=0;
                         }
                         else{
+                            postId=Posts.get(position).getId();
                             comments.setVisibility(View.VISIBLE);
-                            CommentsAdapter commentsAdapter=new CommentsAdapter(CommentsList,context);
+//                            if (CommentsList!=null){
+//                                Log.d("TempList", "onClick: CommentList is not null");
+//                                for (int i=0;i<CommentsList.size();i++){
+//                                    if(Integer.parseInt(CommentsList.get(i).getName())==postId){
+//                                        TempList.add(CommentsList.get(i));
+//                                        Log.d("TempList", "onClick: added "+i);
+//                                    }
+//                                }
+//                            }
+//                            Boolean bool=postId==2;
+
+                            CommentsAdapter commentsAdapter=new CommentsAdapter(CommentsList, context, postId);
                             comments.setLayoutManager(new LinearLayoutManager(context));
                             comments.setAdapter(commentsAdapter);
                             commentsAdapter.notifyDataSetChanged();
+                            ShowComments.setText("Hide"+postId);
                             opened=1;
                         }
 
